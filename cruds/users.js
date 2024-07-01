@@ -17,6 +17,18 @@ crudsObj.postUser = (company_id, branch_id, username, password, role, category, 
     })
 };
 
+crudsObj.postUsernNew = (companyId, username, role, email, password) => {
+    console.log(password);
+    return new Promise((resolve, reject) => {
+        pool.query('INSERT INTO users(username,role,email,password,client_profile_id) VALUES (?,?,?,?,?)', [username, role, email, password, companyId], (err, result) => {
+            if (err) {
+                return reject(err);
+            }
+            return resolve({ statu: '200', message: 'saving successful' });
+        })
+    })
+};
+
 crudsObj.postUser2 = (company_id, branch_id, username, password, role, category, email, notify, activesession, addproperty, editproperty, approverequests, delivery, status, employee_id, company_email, client_profile_id, user_phone, otp) => {
     return new Promise((resolve, reject) => {
         pool.query('INSERT INTO users(company_id,branch_id,username,password,role,category,email,notify,activesession,addproperty,editproperty,approverequests,delivery,status,client_profile_id, OTP) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)', [company_id, branch_id, username, password, role, category, email, notify, activesession, addproperty, editproperty, approverequests, delivery, status, client_profile_id, otp], (err, result) => {

@@ -2,7 +2,6 @@ const express = require('express');
 const userRouter = express.Router();
 const usersDbOperations = require('../cruds/users');
 
-
 userRouter.post('/', async (req, res, next) => {
     try {
         let postedValues = req.body;
@@ -32,6 +31,26 @@ userRouter.post('/', async (req, res, next) => {
         res.sendStatus(500);
     }
 })
+
+userRouter.post('/user/', async (req, res, next) => { 
+    try {
+        let postedValues = req.body;
+        let companyId = postedValues.companyId;
+        let username = postedValues.username;
+        let role = postedValues.role; 
+        let email = postedValues.email; 
+        let password = postedValues.password; 
+
+        console.log(email);
+
+        let results = await usersDbOperations.postUsernNew(companyId, username, role, email, password);
+        res.json(results);
+    } catch (e) {
+        console.log(e);
+        res.sendStatus(500);
+    }
+})
+
 userRouter.post('/client/', async (req, res, next) => {
     try {
         let postedValues = req.body;
