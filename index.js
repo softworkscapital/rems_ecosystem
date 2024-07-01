@@ -4,6 +4,9 @@ const cors = require('cors');
 
 const https = require('https');
 
+const path = require('path');
+const fs = require('fs');
+
 // Route path
 const userRouter = require('./routes/users');
 const clientRouter = require('./routes/client_profile');
@@ -34,5 +37,5 @@ https.createServer(options, app).listen(process.env.APPPORT || '3009', () => {
 });
 
 // app.listen(process.env.APPPORT || '3003', () => {
-//     console.log('app is listening to port' + '3003');
+//     console.log('app is listening to port' + process.env.APPPORT);
 // });
